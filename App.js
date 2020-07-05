@@ -1,10 +1,11 @@
 import React from 'react';
 import Main from './App/components/Main';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 export default class App extends React.Component {
   render() {
-    return <Main style={styles.main} />;
+    return <Main style={styles.main} />
   }
 }
 

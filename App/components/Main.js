@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
   ScrollView,
   View,
@@ -11,6 +10,7 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import Note from './Note';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 export default class Main extends React.Component {
 
@@ -24,7 +24,7 @@ export default class Main extends React.Component {
 
   addNote () {
     if (this.state.noteText) {
-       var d = new Date();
+       let d = new Date();
         this.state.noteArray.push({
          'date':d.getFullYear() +
          '/' + (d.getMonth() + 1 ) +
@@ -66,7 +66,9 @@ export default class Main extends React.Component {
               placeholderTextColor="white" />
           </KeyboardAvoidingView>
             <TouchableOpacity onPress={this.addNote.bind(this)} style={styles.addButton}>
-              <Text>+</Text>
+              <View>
+                <FontAwesome5 name={'pen'} size={30}/>
+              </View>
               </TouchableOpacity>
            </View>
     );

@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import {StyleSheet, View, TouchableOpacity, Text} from 'react-native';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 
 export default class Note extends React.Component {
@@ -10,7 +11,7 @@ export default class Note extends React.Component {
         <Text style={styles.noteText}>{this.props.val.date}</Text>
         <Text style={styles.noteText}>{this.props.val.note}</Text>
         <TouchableOpacity onPress={this.props.DeleteM} style={styles.noteDelete}>
-        <Text>Delete</Text>
+        <View><FontAwesome5 name={'trash-alt'} style={styles.delete}/></View>
         </TouchableOpacity>
       </View>
     );
@@ -18,6 +19,9 @@ export default class Note extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  delete: {
+    color: 'white',
+  },
   note: {
     position: 'relative',
     padding: 20,
@@ -36,7 +40,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#2980b9',
+    // backgroundColor: '#2980b9',
     padding: 10,
     top: 10,
     bottom: 10,
