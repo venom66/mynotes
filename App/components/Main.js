@@ -8,6 +8,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  KeyboardAvoidingView,
 } from 'react-native';
 import Note from './Note';
 
@@ -36,76 +37,99 @@ export default class Main extends React.Component {
     }
  }
 
+ deleteM (key) {
+    this.state.noteArray.splice(key, 1);
+    this.setState({noteArray: this.state.noteArray});
+
+ };
+
   render() {
 
     let notes = this.state.noteArray.map((val, key) => {
     return <Note key={key} keyval={key} val={val}
-                deleteM={ ()=>this.deleteM(key) }/>;
+                DeleteM={ ()=>this.deleteM(key) }/>;
     });
     return (
-    <SafeAreaView style={styles.SafeAreaView}>
-        <View style={styles.container}>
-          <View style={styles.header}>
-              <Text style={styles.text}> -My Notes -</Text>
-          </View>
-        </View>
+          <View style={styles.container}>
+            <View style={styles.header}>
+                <Text style={styles.headerText}> -My Notes -</Text>
+            </View>
 
-      <ScrollView style={styles.scrollContainer}>
-        {notes}
-      </ScrollView>
-
-        <View style={styles.footer}>
-            <TextInput style={styles.TextInput}
-            onChangeText={(noteText) => this.setState({noteText: noteText})}
-            value={this.state.noteText}
-            placeholder=">note"
-            placeholderTextColor="black" />
-        </View>
-          <TouchableOpacity onPress={this.addNote.bind(this)} style={styles.addButton}>
-            <Text>+</Text>
-            </TouchableOpacity>
-    </SafeAreaView>
+        <ScrollView style={styles.scrollContainer}>
+          {notes}
+        </ScrollView>
+          <KeyboardAvoidingView style={styles.footer}>
+              <TextInput style={styles.textInput}
+              onChangeText={(noteText) => this.setState({noteText: noteText})}
+              value={this.state.noteText}
+              placeholder=">note"
+              placeholderTextColor="white" />
+          </KeyboardAvoidingView>
+            <TouchableOpacity onPress={this.addNote.bind(this)} style={styles.addButton}>
+              <Text>+</Text>
+              </TouchableOpacity>
+           </View>
     );
   }
 
 }
 
 const styles = StyleSheet.create({
-    SafeAreaView: {
+  SafeAreaView: {
       backgroundColor: 'grey',
-      height: '100%',
+      minHeight: 350,
       color: 'white',
     },
     container: {
-        justifyContent: 'center',
-        textAlign: 'center',
-        backgroundColor: '#625B5A',
-        // flex: 1,
-    },
-    header: {
-        justifyContent: 'center',
-    },
-    text: {
-        justifyContent: 'center',
-        textAlign: 'center',
-        color: 'yellow',
-    },
-    scrollContainer: {
-        flex: 1,
-        marginBottom: 100,
-    },
-    TextInput: {
-        alignSelf: 'stretch',
-        color: 'black',
-        padding: 20,
-        borderTopWidth: 2,
-        backgroundColor: 'pink',
-
-    },
+      flex: 1,
+      backgroundColor: '#212121',
+  },
+  header: {
+      backgroundColor: 'black',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderBottomWidth: 10,
+      borderBottomColor: '#ddd',
+      // color: 'yellow',
+  },
+  headerText: {
+      color: 'yellow',
+      fontSize: 18,
+      padding: 26,
+  },
+  scrollContainer: {
+      flex: 1,
+      marginBottom: 100,
+  },
+  footer: {
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+      zIndex: 10,
+      backgroundColor: 'black',
+      color: 'white',
+      borderBottomColor: 'yellow',
+      borderBottomWidth: 2,
+      borderBottomRightRadius: 10,
+      // borderBottom: '1px solid white',
+  },
+  textInput: {
+      alignSelf: 'stretch',
+      // color: '#fff',
+      padding: 20,
+      backgroundColor: '#252525',
+      borderTopWidth: 2,
+      borderTopColor: '#ededed',
+      color: 'white',
+      borderBottomColor: 'white',
+      borderBottomWidth: 2,
+      borderBottomRightRadius: 10,
+  },
     addButton: {
-        position: 'relative',
+        position: 'absolute',
         zIndex: 11,
-        right: -300,
+        right: 20,
         bottom: 90,
         backgroundColor: '#E91E63',
         width: 90,
@@ -119,15 +143,16 @@ const styles = StyleSheet.create({
       color: '#fff',
       fontSize: 24,
     },
-    footer: {
-      position: 'relative',
+    footer1: {
+      position: 'absolute',
       bottom: 0,
       left: 0,
       right: 0,
       zIndex: 10,
       color: 'black',
       top:  50,
-      flex: 2,
+      // flex: 1,
       justifyContent: 'flex-end',
     },
+
 });
